@@ -1,0 +1,12 @@
+{
+  "prompt_id": "ticket_classifier",
+  "versions": [
+    {
+      "version": 1,
+      "active": true,
+      "notes": "Initial deterministic JSON classification prompt for synthetic support tickets.",
+      "input_variables": ["subject", "body"],
+      "template": "Classify this synthetic support ticket. Return only JSON with category, severity, confidence, rationale, and needs_review. Subject: $subject\nBody: $body"
+    }
+  ]
+}

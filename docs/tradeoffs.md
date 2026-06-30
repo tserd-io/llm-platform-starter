@@ -1,0 +1,21 @@
+# Tradeoffs
+
+## Included
+
+- Deterministic mock provider for local development and CI
+- Optional OpenAI provider behind an extra dependency
+- JSON prompt registry to avoid requiring external services
+- Pydantic validation for structured outputs
+- SQLite trace store for transparent local observability
+
+## Deferred
+
+- Multi-tenant auth and RBAC
+- Prompt approval workflow
+- Distributed tracing backend
+- Full PII redaction pipeline
+- RAG retrieval service
+- Kubernetes deployment manifests
+- Advanced eval rubrics and human review UI
+
+The goal is to show platform thinking without turning the repo into an unfinished enterprise system.

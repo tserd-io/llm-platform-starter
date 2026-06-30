@@ -1,0 +1,3 @@
+{"id":"billing_refund","subject":"Refund request","body":"Customer asks for a refund after duplicate billing.","expected_category":"billing"}
+{"id":"technical_api","subject":"API error","body":"Integration returns a 500 error during export.","expected_category":"technical"}
+{"id":"account_access","subject":"Password reset","body":"User cannot access their account after password reset.","expected_category":"account"}

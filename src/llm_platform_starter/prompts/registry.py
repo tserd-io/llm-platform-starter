@@ -1,0 +1,60 @@
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from importlib import resources
+from pathlib import Path
+from string import Template
+
+
+@dataclass(frozen=True)
+class PromptTemplate:
+    prompt_id: str
+    version: int
+    template: str
+    input_variables: list[str]
+    notes: str = ""
+    active: bool = True
+
+    def render(self, **kwargs: str) -> str:
+        missing = sorted(set(self.input_variables) - set(kwargs))
+        if missing:
+            raise ValueError(f"Missing prompt variables: {', '.join(missing)}")
+        return Template(self.template).safe_substitute(**kwargs)
+
+
+class PromptRegistry:
+    def __init__(self, template_dir: Path | None = None) -> None:
+        self.template_dir = template_dir
+
+    def get(self, prompt_id: str, version: int | None = None) -> PromptTemplate:
+        templates = self._load_prompt_file(prompt_id)
+        if version is None:
+            candidates = [item for item in templates if item.get("active", True)]
+            if not candidates:
+                raise ValueError(f"No active versions found for prompt_id={prompt_id}")
+            item = max(candidates, key=lambda entry: entry["version"])
+        else:
+            matches = [item for item in templates if item["version"] == version]
+            if not matches:
+                raise ValueError(f"Prompt {prompt_id} version {version} not found")
+            item = matches[0]
+        return PromptTemplate(
+            prompt_id=prompt_id,
+            version=item["version"],
+            template=item["template"],
+            input_variables=item["input_variables"],
+            notes=item.get("notes", ""),
+            active=item.get("active", True),
+        )
+
+    def _load_prompt_file(self, prompt_id: str) -> list[dict]:
+        filename = f"{prompt_id}.json"
+        if self.template_dir:
+            raw = (self.template_dir / filename).read_text(encoding="utf-8")
+        else:
+            raw = resources.files("llm_platform_starter.prompts.templates").joinpath(
+                filename
+            ).read_text(encoding="utf-8")
+        payload = json.loads(raw)
+        return payload["versions"]
