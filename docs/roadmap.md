@@ -14,9 +14,9 @@
 
 ## Next
 
+- Complete [Milestone 1 issue tickets](issues/milestone-1.md)
 - Add prompt version comparison report
 - Add OpenAI smoke test behind an environment flag
-- Add a CLI command for eval and trace summaries
 - Add architecture screenshots or terminal examples to the README
 - Add a lightweight Dockerfile
 

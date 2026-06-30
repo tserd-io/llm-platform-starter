@@ -1,0 +1,109 @@
+# Milestone 1 Issue Tickets: Runnable MVP
+
+Milestone 1 focuses on making the project easy to run, inspect, and trust from a fresh clone. These tickets are scoped so each can be implemented independently.
+
+## 1. Add CLI Entry Points For Classify, Eval, And Metrics
+
+Purpose:
+Expose the platform through simple commands, not only Python modules, so the MVP workflow is easy to demonstrate.
+
+Tasks:
+
+- Add a console script in `pyproject.toml`.
+- Add `llm-platform classify`.
+- Add `llm-platform eval`.
+- Add `llm-platform metrics`.
+- Keep command output JSON-friendly.
+
+Acceptance criteria:
+
+- `llm-platform classify --subject "Refund" --body "Duplicate charge"` returns valid JSON.
+- `llm-platform eval` returns an eval summary.
+- `llm-platform metrics` works against the configured SQLite trace DB.
+- Tests cover the CLI commands without requiring live API keys.
+
+Suggested labels:
+
+- `enhancement`
+- `developer-experience`
+- `mvp`
+
+## 2. Add Provider Factory
+
+Purpose:
+Make provider selection explicit, configurable, and production-shaped.
+
+Tasks:
+
+- Add a provider factory module.
+- Support `mock` by default.
+- Support `openai` only when configured.
+- Raise clear errors for unknown providers or missing API key.
+- Update API and example flows to use the factory where appropriate.
+
+Acceptance criteria:
+
+- Tests cover mock provider creation.
+- Tests cover unsupported provider errors.
+- OpenAI provider is never required for CI.
+- Configuration remains simple for local mock-mode usage.
+
+Suggested labels:
+
+- `enhancement`
+- `provider-gateway`
+- `mvp`
+
+## 3. Add Retry And Timeout Wrapper
+
+Purpose:
+Show minimal platform reliability behavior around provider calls without turning the MVP into a large framework.
+
+Tasks:
+
+- Add basic retry and timeout settings.
+- Wrap provider calls with retry handling.
+- Track provider failure categories in traces.
+- Keep the mock provider deterministic.
+- Document the reliability behavior in the README or tradeoffs doc.
+
+Acceptance criteria:
+
+- Failed provider calls record trace metadata when possible.
+- Unit tests cover retry exhaustion.
+- Timeout/retry defaults are visible in settings.
+- README explains this as a minimal reliability pattern.
+
+Suggested labels:
+
+- `enhancement`
+- `provider-gateway`
+- `observability`
+- `mvp`
+
+## 4. Improve Eval Report
+
+Purpose:
+Make evals feel like platform regression tooling rather than a one-off script.
+
+Tasks:
+
+- Add schema validity rate.
+- Add needs-review rate.
+- Add average latency.
+- Add estimated cost.
+- Add JSON report output.
+- Preserve per-case results.
+
+Acceptance criteria:
+
+- `llm-platform eval` prints summary metrics.
+- Eval report includes per-case results.
+- Tests validate the report shape.
+- Eval execution remains deterministic with the mock provider.
+
+Suggested labels:
+
+- `enhancement`
+- `evals`
+- `mvp`
