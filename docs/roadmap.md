@@ -14,7 +14,11 @@
 
 ## Next
 
-- Complete [Milestone 1 issue tickets](issues/milestone-1.md)
+- Complete the public [issue ticket packages](issues/index.md):
+  - [Milestone 1: Runnable MVP](issues/milestone-1.md)
+  - [Milestone 2: Observability And Guardrails](issues/milestone-2.md)
+  - [Milestone 3: Portfolio-Grade Documentation](issues/milestone-3.md)
+  - [Milestone 4: Packaging And Release](issues/milestone-4.md)
 - Add prompt version comparison report
 - Add OpenAI smoke test behind an environment flag
 - Add architecture screenshots or terminal examples to the README

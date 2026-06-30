@@ -107,3 +107,33 @@ Suggested labels:
 - `enhancement`
 - `evals`
 - `mvp`
+
+## 5. Final QA And Milestone Approval
+
+Purpose:
+Confirm Milestone 1 is complete, coherent, and ready to build on before starting the next milestone.
+
+Tasks:
+
+- Run the full test suite.
+- Run linting.
+- Verify CLI commands work from a fresh editable install.
+- Verify API health and ticket-classification flow.
+- Verify eval report output is deterministic.
+- Review README quickstart against the implemented commands.
+- Confirm no private planning files, generated caches, trace DBs, or secrets are tracked.
+
+Acceptance criteria:
+
+- `pytest` passes.
+- `ruff check .` passes.
+- CLI smoke checks pass.
+- API smoke checks pass.
+- Git status contains only intended public files.
+- Milestone 1 completion notes are added to the roadmap or release notes.
+
+Suggested labels:
+
+- `qa`
+- `mvp`
+- `release`
